@@ -83,6 +83,7 @@ public class DashState : AbilityState
     {
 
         dashDirection = player.slopeMovementDirection;
+
         Vector3 finalMove = player.dashSpeed * Time.deltaTime * dashDirection ;
 
         player.playerRB.AddForce(finalMove, ForceMode.VelocityChange);

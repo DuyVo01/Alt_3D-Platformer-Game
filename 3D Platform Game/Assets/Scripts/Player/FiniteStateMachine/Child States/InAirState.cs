@@ -96,15 +96,11 @@ public class InAirState : State
 
     private void AirMoveAlternative(Vector3 move)
     {
-        Vector3 finalMove = (player.movementSpeed + 300) * Time.deltaTime * move;
+        Vector3 finalMove = player.movementSpeed * Time.deltaTime * move;
 
-        player.playerRB.AddForce(finalMove, ForceMode.Acceleration);
-        
-        if (player.playerRB.velocity.magnitude > 10f)
-        {
-            player.playerRB.AddForce(-finalMove, ForceMode.Acceleration);
-        }
+        Vector3 speedAirDif = finalMove - player.playerRB.velocity;
 
+        player.playerRB.AddForce(speedAirDif * 3, ForceMode.Acceleration);
     }
 
 }

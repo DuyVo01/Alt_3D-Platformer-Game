@@ -14871,9 +14871,9 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0, z: 0}
   slopeMovementDirection: {x: 0, y: 0, z: 0}
   rotationSpeed: 2
-  dashSpeed: 100
+  dashSpeed: 300
   amountOfDashLeft: 2
-  jumpHeight: 8
+  jumpHeight: 350
   holdingJumpHeight: 3
   fallJumpMultiplier: 1.5
   lowJumpMultiplier: 1
