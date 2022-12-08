@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
     //Jump Variables
     public float jumpHeight;
-    public float holdingJumpHeight;
+    //public float holdingJumpHeight;
     public float fallJumpMultiplier;
     public float lowJumpMultiplier;
     public int amountOfJumpLeft;
@@ -175,45 +175,25 @@ public class Player : MonoBehaviour
 
     public void FloatingCollider()
     {
-        float rideHeight = playerCapsuleCollider.center.y + floatingDistance;
+        float rideHeight = floatingDistance;
 
-        Ray downRay = new Ray(transform.TransformPoint(playerCapsuleCollider.center), Vector3.down);
+        Ray downRay = new Ray(playerCapsuleCollider.bounds.center, Vector3.down);
 
         bool rayDidHit = Physics.Raycast(downRay, out rayFloatHit, rideHeight, whatIsGround);
 
         if (rayDidHit)
         {
-            Debug.DrawRay(transform.TransformPoint(playerCapsuleCollider.center), downRay.direction, Color.yellow);
+            Debug.DrawRay(playerCapsuleCollider.bounds.center, downRay.direction, Color.yellow);
 
-            float distanceToLift = playerCapsuleCollider.center.y - rayFloatHit.distance ;
+            float distanceToLift = playerCapsuleCollider.center.y * transform.localScale.y - rayFloatHit.distance;
 
-            float amountToLift = distanceToLift * 50f - playerRB.velocity.y;
+            float amountToLift = distanceToLift * 50 - playerRB.velocity.y;
 
             Vector3 springForce = new Vector3(0f, amountToLift, 0f);
              
             playerRB.AddForce(springForce, ForceMode.VelocityChange);
         }  
     }
-
-    //public void stepClimb()
-    //{
-    //    RaycastHit hitLower;
-    //    if(Physics.Raycast(stepRayLower.position, movementDirection, out hitLower, 0.5f))
-    //    {
-    //        Debug.DrawRay(stepRayLower.position, movementDirection, Color.red);
-    //        RaycastHit hitUpper;
-    //        if (!Physics.Raycast(stepRayUpper.position, movementDirection, out hitUpper, 0.3f))
-    //        {
-                
-    //            playerRB.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
-    //            playerRB.AddForce(new Vector3(-playerRB.velocity.x, 0, -playerRB.velocity.z));
-    //        }else
-    //        {
-    //            Debug.DrawRay(stepRayUpper.position, movementDirection, Color.red);
-    //        }
-    //    }
-
-    //}
 
     public void AnimationFinished()
     {

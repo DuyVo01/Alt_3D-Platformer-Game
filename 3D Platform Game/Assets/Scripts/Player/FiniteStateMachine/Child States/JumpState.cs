@@ -43,10 +43,10 @@ public class JumpState : AbilityState
 
     private void Jump()
     {
-        player.playerRB.velocity = new Vector3(player.currentVelocity.x, 0, player.currentVelocity.z);
+        //player.playerRB.velocity = new Vector3(player.currentVelocity.x, 0, player.currentVelocity.z);
 
         Vector3 jumpDirection = player.jumpHeight * Time.deltaTime * Vector3.up;
-        player.playerRB.AddForce(jumpDirection, ForceMode.VelocityChange);
+        player.playerRB.AddForce(jumpDirection - new Vector3(0, player.playerRB.velocity.y, 0), ForceMode.VelocityChange);
     }
 
     public void ResetJumpCount() => player.amountOfJumpLeft = 2;

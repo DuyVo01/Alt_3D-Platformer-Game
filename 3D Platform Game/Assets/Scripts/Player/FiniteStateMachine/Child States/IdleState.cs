@@ -35,6 +35,6 @@ public class IdleState : GroundState
     public override void PhysicalUpdate()
     {
         base.PhysicalUpdate();
-        player.playerRB.AddForce(new Vector3(-player.playerRB.velocity.x * 10, 0, -player.playerRB.velocity.z * 10), ForceMode.Acceleration);
+        player.playerRB.AddForce(new Vector3(-player.playerRB.velocity.x * 11, 0, -player.playerRB.velocity.z * 11), ForceMode.Acceleration);
     }
 }
