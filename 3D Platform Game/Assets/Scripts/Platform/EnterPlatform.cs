@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class EnterPlatform : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    private void OnTriggerEnter(Collider collider)
+    public Vector3 lastPlatformPosition;
+    public Vector3 velocity;
+    private void Start()
     {
-        collider.transform.SetParent(transform);
+        lastPlatformPosition = transform.position;
     }
 
-    private void OnTriggerExit(Collider collider)
+    private void FixedUpdate()
     {
-        collider.transform.SetParent(null);   
+        velocity = (transform.position - lastPlatformPosition) / Time.deltaTime;
+
+        lastPlatformPosition = transform.position;
     }
 }

@@ -9,6 +9,7 @@ public class DashState : AbilityState
     Coroutine ResetDash;
 
     //Dash Effect
+    float dashDuration = 0.07f;
     public float activeTime = 0.2f;
     public float meshRefreshRate = 0.01f;
     bool isTrailActive;
@@ -70,7 +71,7 @@ public class DashState : AbilityState
 
         Dash();
 
-        if (Time.time > dashStartTime + 0.1f)
+        if (Time.time > dashStartTime + dashDuration)
         {
             isAbilityDone = true;
 
@@ -151,7 +152,7 @@ public class DashState : AbilityState
 
     IEnumerator TrailFading(MeshRenderer mR, GameObject objectToDestroy)
     {
-        for (float f = 0; f < activeTime + 0.1f; f += meshRefreshRate)
+        for (float f = 0; f < activeTime + dashDuration; f += meshRefreshRate)
         {
             Color c = mR.material.color;
 

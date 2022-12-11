@@ -6,17 +6,17 @@ public class CircularMotion : MonoBehaviour
 {
     public Transform pivot;
     private Quaternion originalRotation;
-    private Rigidbody RB;
 
-    [SerializeField]private float angle;
+    [SerializeField]
+    private float angularSpeed;
 
-    private void Start()
+    //Update is called once per frame
+    void Start()
     {
         originalRotation = transform.rotation;
-        RB = GetComponent<Rigidbody>();
     }
-    //Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         
     }
@@ -24,6 +24,6 @@ public class CircularMotion : MonoBehaviour
     private void FixedUpdate()
     {
         transform.rotation = originalRotation;
-        transform.RotateAround(pivot.position, new Vector3(1, 0, 0), angle * Time.deltaTime);
+        transform.RotateAround(pivot.position, pivot.right, angularSpeed);
     }
 }

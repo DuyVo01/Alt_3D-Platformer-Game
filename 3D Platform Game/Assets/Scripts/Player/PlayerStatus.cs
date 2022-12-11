@@ -9,6 +9,7 @@ public class PlayerStatus : MonoBehaviour
     public bool playerEnhanced = false;
 
     private float moveSpeed;
+    private float jumpHeight;
 
     Coroutine enchanced;
 
@@ -18,6 +19,7 @@ public class PlayerStatus : MonoBehaviour
 
     public static event Action<PlayerStatus> OnUpdateScore;
 
+
     private void Awake()
     {
         player = GetComponent<Player>();
@@ -26,6 +28,8 @@ public class PlayerStatus : MonoBehaviour
     private void Start()
     {
         moveSpeed = player.movementSpeed;
+        jumpHeight = player.jumpHeight;
+
     }
 
     private void OnEnable()
@@ -33,12 +37,22 @@ public class PlayerStatus : MonoBehaviour
         for (int i = 0; i < enhancedParticleEffect.Length; i++)
         {
             enhancedParticleEffect[i].Stop();
-        }      
+        }
+        GameLogic.OnGameOver += UpdateFinalScoreOnGameOver;
+    }
+    private void OnDisable()
+    {
+        GameLogic.OnGameOver -= UpdateFinalScoreOnGameOver;
     }
 
     public void UpdateScore()
     {
         OnUpdateScore?.Invoke(this);
+    }
+
+    public void UpdateFinalScoreOnGameOver(GameLogic gameLogic)
+    {
+        gameLogic.finalScoreValue.text = playerScore.ToString("0000");
     }
 
     public void ScoreCalculating(int scoreToAdd)
@@ -56,7 +70,8 @@ public class PlayerStatus : MonoBehaviour
     public void ActivateEnhanced() 
     {
         playerEnhanced = true;
-        player.movementSpeed = moveSpeed * 2;
+        player.movementSpeed = moveSpeed * 1.5f;
+        player.jumpHeight = jumpHeight * 1.2f;
         for (int i = 0; i < enhancedParticleEffect.Length; i++)
         { 
             enhancedParticleEffect[i].Play();
@@ -88,6 +103,9 @@ public class PlayerStatus : MonoBehaviour
         }
 
         playerEnhanced = false;
+
         player.movementSpeed = moveSpeed;
+
+        player.jumpHeight = jumpHeight;
     }
 }

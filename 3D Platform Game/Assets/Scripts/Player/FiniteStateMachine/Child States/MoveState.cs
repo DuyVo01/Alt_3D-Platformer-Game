@@ -54,7 +54,7 @@ public class MoveState : GroundState
         Debug.DrawRay(player.slopeHit.point, slopMoveDirection, Color.black);
     }
 
-    private void Move(Vector3 move)
+    public void Move(Vector3 move)
     {
         Vector3 playerHorizontalVelocity = player.playerRB.velocity;
 
