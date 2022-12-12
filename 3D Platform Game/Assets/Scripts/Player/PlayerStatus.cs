@@ -82,7 +82,7 @@ public class PlayerStatus : MonoBehaviour
             StopCoroutine(enchanced);
         }
 
-        enchanced =  StartCoroutine(EnchancedCoolDown());
+        enchanced = StartCoroutine(EnchancedCoolDown());
     }
 
     IEnumerator EnchancedCoolDown()

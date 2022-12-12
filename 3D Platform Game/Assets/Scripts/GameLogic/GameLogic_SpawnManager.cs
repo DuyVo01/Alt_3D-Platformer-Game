@@ -24,7 +24,7 @@ public class GameLogic_SpawnManager : MonoBehaviour
             _timeDelayPassed = 0;
         }
 
-        Debug.Log(collectibleSets[1].GetComponent<CollectiblesSetsProperties>()._delayMark);
+        //Debug.Log(collectibleSets[1].GetComponent<CollectiblesSetsProperties>()._delayMark);
     }
 
     private void Respawn()
